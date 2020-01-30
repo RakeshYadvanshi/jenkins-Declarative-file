@@ -1,1 +1,20 @@
-
+pipeline {
+    agent any 
+    stages {
+        stage('Checkout Code') { 
+            steps {
+               git 'https://github.com/RakeshYadvanshi/BloggerAspnetCore2_2.git'
+            }
+        }
+        stage('Package Restore and Build') { 
+            steps {
+               bat label: '', script: "dotnet build"
+            }
+        }
+        stage('Run UnitTest') { 
+            steps {
+                  bat label: '', script: 'dotnet test'
+            }
+        }
+    }
+}
